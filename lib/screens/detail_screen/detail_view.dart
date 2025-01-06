@@ -30,6 +30,8 @@ class DetailView extends StatelessWidget {
         final imgurl = "https://image.tmdb.org/t/p/w500$posterPath";
 
         return Scaffold(
+          backgroundColor: const Color.fromARGB(255, 45, 44, 44),
+
           body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +44,7 @@ class DetailView extends StatelessWidget {
                     width: double.infinity,
                     child: Image.network(
                       imgurl,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       errorBuilder: (context, error, stackTrace) {
                         return const Center(
                           child: Text("Image not available"),
@@ -81,12 +83,17 @@ class DetailView extends StatelessWidget {
                  Padding(
                    padding: const EdgeInsets.all(8.0),
                    child: Text(
-                               
+          
                       viewModel.detailScreenData["original_title"],
                       style: TextStyle(
-                          color: const Color.fromARGB(255, 97, 76, 1),
+                          color: const Color.fromARGB(255, 255, 255, 253),
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
+                          shadows: [
+                            Shadow( offset: Offset(1, 1),
+                    blurRadius: 4,
+                    color: Colors.black.withOpacity(0.5),)
+                          ]
                       ),
                    ),
                    
@@ -97,14 +104,15 @@ class DetailView extends StatelessWidget {
                         viewModel.detailScreenData['overview'],
                     style: TextStyle(
                         fontWeight: FontWeight.w900,
-                            fontSize: 15,
+                            fontSize: 14,
+                            color: const Color.fromARGB(176, 255, 254, 254)
                         
                     ),
                     ),
                     ),
                     Padding(padding: EdgeInsets.all(10.0),
                     child: Text(
-                        "Reales Date: ${viewModel.detailScreenData["release_date"]}",style: TextStyle(
+                        "Release Date: ${viewModel.detailScreenData["release_date"]}",style: TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.w900,
                             fontSize: 12,
@@ -120,3 +128,4 @@ class DetailView extends StatelessWidget {
     );
   }
 }
+

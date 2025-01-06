@@ -54,7 +54,7 @@ class SplashView extends StatelessWidget {
               ? const HomeView() // Navigate to HomeView if the user is logged in
               : const LoginView(), // Navigate to LoginView otherwise
           splashIconSize: 250,
-          duration: 300,
+          duration: 500,
           splashTransition: SplashTransition.slideTransition,
         );
       },

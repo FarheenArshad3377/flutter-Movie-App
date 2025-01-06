@@ -84,11 +84,7 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
               
-                
-                // Other widgets such as ListView, Trending Movies, etc.
-    
-  
-
+                // Other widgets such as ListView, Trending Movies, etc.    
 SizedBox(
   child: Expanded(
     child: ListView.builder(
@@ -117,14 +113,17 @@ SizedBox(
    padding: const EdgeInsets.all(8.0),
    child: Row(
      children: [
-       CircleAvatar(
-         radius: 20,
+       Container(
+        width: 30,
+        height: 30,
          child: Image.network(
            imgurl,
             fit: BoxFit.fill,
          ),
-   
        ),
+   SizedBox(
+    width: 9,
+   ),
        Text(
          movie['title'] ?? '',
          style: TextStyle(color: const Color.fromARGB(255, 2, 2, 2)),
@@ -144,12 +143,19 @@ const SizedBox(height: 20),
  Padding(
    padding: const EdgeInsets.all(8.0),
    child: Text(
-     "Trending MOVIES 🔥",
+     "Trending Movies🔥",
      style: TextStyle(
-       color: Colors.white,
        fontWeight: FontWeight.w800,
-       fontSize: 17,
-     ),
+       fontSize: 20, // Slightly larger text size for city name
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ],
+              ),
    ),
  ),
  SizedBox(height: 20,),
@@ -184,7 +190,25 @@ child: Container(
 ),
              ),
              SizedBox(height: 10,),
-             Expanded(child: Text(viewModel.allMovies[index]["original_title"],style: TextStyle(color: Colors.white),))
+             Expanded(child: Text(
+                      movie["original_title"].length > 12
+                          ? movie["original_title"].substring(0, 12) + "..."
+                          : movie["original_title"], 
+                      style: TextStyle(color: Colors.white,
+                      fontSize: 13, // Slightly larger text size for city name
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ],
+              ),
+                      overflow: TextOverflow.ellipsis, // handles overflow
+                      maxLines: 1, // ensures that it only takes one line
+                    ),
+                  )
            ],
          ),
        );
@@ -197,12 +221,20 @@ child: Container(
     child: Text(
      "Popular Movies ❤️",
      style: TextStyle(
-       color: Colors.white,
        fontWeight: FontWeight.w800,
-       fontSize: 17,
+       fontSize: 20, // Slightly larger text size for city name
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ],
+              ),
      ),
      ),
-  ),
+  
  SizedBox(height: 20,),
  SizedBox(
    height: 230,
@@ -234,7 +266,25 @@ child: Container(
 ),
              ),
              SizedBox(height: 10,),
-             Expanded(child: Text(viewModel.popularMovies[index]["original_title"],style: TextStyle(color: Colors.white),)),
+             Expanded(child:
+              Text(
+                      movie["original_title"].length > 12
+                          ? movie["original_title"].substring(0, 12) + "..."
+                          : movie["original_title"], 
+                      style: TextStyle(color: Colors.white,
+                      fontSize: 13, // Slightly larger text size for city name
+                fontWeight: FontWeight.bold,
+                shadows: [
+                  Shadow(
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                ],
+              ),
+                      overflow: TextOverflow.ellipsis, // handles overflow
+                      maxLines: 1, // ensures that it only takes one line
+                    ),  ),
            SizedBox(height: 20,),
            
            ],
@@ -255,11 +305,13 @@ Center(
   ),
 ),
 SizedBox(height: 15),
+
 Container(
   padding: const EdgeInsets.symmetric(horizontal: 8.0), 
   margin: EdgeInsets.only(top: 20),// Add padding for better alignment
   child: GridView.builder(
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      childAspectRatio: 0.9,
       crossAxisCount: 2, // Number of columns
       crossAxisSpacing: 10, // Space between columns
       mainAxisSpacing: 10, // Space between rows
@@ -284,19 +336,21 @@ Container(
         child: Column(
           children: [
             Container(
-              width: double.infinity, // Make the image fill the column width
-              height: 100, // Define a consistent height for images
+              width: MediaQuery.of(context).size.width, // Make the image fill the column width
+              height: 140, // Define a consistent height for images
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0), // Rounded corners
                 image: DecorationImage(
                   image: NetworkImage(imgurl),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain
                 ),
               ),
             ),
             const SizedBox(height: 8), // Space between image and title
             Text(
-              movie["original_title"] ?? "",
+                      movie["original_title"].length > 9
+                          ? movie["original_title"].substring(0, 9) + "..."
+                          : movie["original_title"], 
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
@@ -314,7 +368,27 @@ Container(
 ),
               ] 
             ),
-          ));
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+  items: const <BottomNavigationBarItem>[
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home, color: Colors.white), // Set icon color to white
+      label: "Home",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.person, color: Colors.white), // Set icon color to white
+      label: "Profile",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.favorite, color: Colors.white), // Set icon color to white
+      label: "Favorites",
+    ),
+  ],
+  backgroundColor: const Color.fromARGB(255, 90, 7, 1), // Set the background color to red
+  selectedItemColor: Colors.white, // Set the selected item label color to white
+  unselectedItemColor: Colors.grey, // Set the unselected item label color to white
+),
+          );
         
       },
     );
@@ -353,7 +427,8 @@ class NavigationDrawer extends StatelessWidget {
       children: [
         const SizedBox(height: 20),
         const CircleAvatar(
-          backgroundColor: Colors.amber,
+          backgroundImage: AssetImage("assets/img/profile1 (1).jpeg"),
+
           radius: 60,
         ),
         const SizedBox(height: 20),
@@ -425,3 +500,4 @@ class NavigationDrawer extends StatelessWidget {
     ],
   );
 }
+

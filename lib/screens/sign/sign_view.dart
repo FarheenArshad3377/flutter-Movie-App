@@ -36,7 +36,7 @@ class SignView extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           Text(
-                            "Create an Account",
+                            "Welcome Back!",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
@@ -44,13 +44,7 @@ class SignView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                           "Welcome Back!",      
-                            style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 16,
-                            ),
-                          ),
+                          
                         ],
                       ),
                     ),
@@ -106,7 +100,7 @@ class SignView extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                "Sign Up",
+                                "Log In",
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -125,3 +119,4 @@ class SignView extends StatelessWidget {
     );
   }
 }
+

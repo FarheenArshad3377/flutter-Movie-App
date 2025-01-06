@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:stacked/stacked.dart';
 import 'package:http/http.dart' as https;
 class HomeModel extends ChangeNotifier{
@@ -17,7 +18,11 @@ class HomeModel extends ChangeNotifier{
   Map <String,String> userData={'email':'abc@gmail.com','username':'ABC'};
 
   final FirebaseFirestore firestore=FirebaseFirestore.instance;
+late PersistentTabController bottomNavController;
 
+  HomeModel() {
+    bottomNavController = PersistentTabController(initialIndex: 0); // Start with first tab
+  }
   void getUserData()async {
     // This can be from Firebase Authentication or Firestore
     var user = FirebaseAuth.instance.currentUser;
@@ -31,15 +36,12 @@ class HomeModel extends ChangeNotifier{
     notifyListeners();
   }
 
-
-
 FireBase_logout() async {
   await FirebaseAuth.instance.signOut();
   userData = {'email': '', 'username': ''}; // Reset user data
   notifyListeners();
 }
 
-  
   moviesGet()async{
     var url=Uri.parse("https://api.themoviedb.org/3/trending/movie/week?api_key=3ac1e61a226df273e868dd0dd0c56dcb");
     var response =await https.get(url);
@@ -93,3 +95,4 @@ print(allMovies);
 //print(allMovies);
   }
 }
+

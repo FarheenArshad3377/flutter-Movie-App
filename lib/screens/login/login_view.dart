@@ -38,7 +38,7 @@ class LoginView extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           Text(
-                          "Sign up to get started!",
+                          "Create An Account!",
                           
                             style: TextStyle(
                               color: Colors.white,
@@ -47,13 +47,7 @@ class LoginView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            "Please login to your account",
-                            style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 16,
-                            ),
-                          ),
+                         
                         ],
                       ),
                     ),
@@ -144,7 +138,7 @@ class LoginView extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "Login",
+                          "Sign Up",
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
@@ -159,7 +153,7 @@ class LoginView extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          "Don't have an account? Sign Up",
+                          "Already have an account? Log In",
                           style: TextStyle(
                             color: Colors.amber,
                             decoration: TextDecoration.underline,
@@ -177,3 +171,4 @@ class LoginView extends StatelessWidget {
     );
   }
 }
+
